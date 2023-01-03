@@ -179,7 +179,7 @@ export class EwtInstallDialog extends LitElement {
                 <ewt-button
                   text-left
                   .label=${!this._isSameFirmware
-                    ? `Install ${this._manifest.name}`
+                    ? `${this._manifest.name}`
                     : `Update ${this._manifest.name}`}
                   @click=${() => {
                     if (this._isSameFirmware) {
@@ -291,7 +291,7 @@ export class EwtInstallDialog extends LitElement {
         <div>
           <ewt-button
             text-left
-            .label=${`Install ${this._manifest.name}`}
+            .label=${`${this._manifest.name}`}
             @click=${() => {
               if (this._manifest.new_install_prompt_erase) {
                 this._state = "ASK_ERASE";
@@ -543,21 +543,17 @@ export class EwtInstallDialog extends LitElement {
         ></ewt-button>
       `;
     } else if (!this._installConfirmed) {
-      heading = "Confirm Installation";
-      const action = isUpdate ? "update to" : "install";
+      heading = "Device Update";
+      // const action = isUpdate ? "update to" : "install";
       content = html`
         ${isUpdate
           ? html`Your device is running
               ${this._info!.firmware}&nbsp;${this._info!.version}.<br /><br />`
           : ""}
-        Do you want to ${action}
-        ${this._manifest.name}&nbsp;${this._manifest.version}?
-        ${this._installErase
-          ? html`<br /><br />All data on the device will be erased.`
-          : ""}
+        Click Next to update your puck holder.
         <ewt-button
           slot="primaryAction"
-          label="Install"
+          label="Next"
           @click=${this._confirmInstall}
         ></ewt-button>
         <ewt-button
